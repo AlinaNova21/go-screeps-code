@@ -1,0 +1,15 @@
+{
+  "name": "screeps-code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "docker run --rm -v $(pwd):/src -w /src tinygo/tinygo tinygo build --no-debug -target wasm -o dist/go.wasm ./src",
+    "_build": "GOOS=js GOARCH=wasm go build -o dist/go.wasm ./src/",
+    "push:test": "yarn push --server test",
+    "push": "yarn build && screeps-api upload dist/*"
+  },
+  "devDependencies": {
+    "screeps-api": "^1.13.0"
+  }
+}
